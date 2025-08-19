@@ -12,6 +12,7 @@ const cors = require("cors");
 const { cloudinaryConnect } = require("./config/cloudinary");
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
+const errorHandler = require("./middleware/errorHandler");
 
 // Setting up port number
 const PORT = process.env.PORT || 4000;
@@ -27,8 +28,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
 	cors({
-		origin: "*",
+		origin: ["http://localhost:3000", "http://localhost:3001"],
 		credentials: true,
+		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+		allowedHeaders: ["Content-Type", "Authorization"],
 	})
 );
 app.use(
@@ -55,6 +58,9 @@ app.get("/", (req, res) => {
 		message: "Your server is up and running ...",
 	});
 });
+
+// Error handling middleware (should be last)
+app.use(errorHandler);
 
 // Listening to the server
 app.listen(PORT, () => {

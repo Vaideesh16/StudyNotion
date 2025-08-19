@@ -7,6 +7,7 @@ import { Route, Routes, useNavigate } from "react-router-dom"
 
 // Components
 import Navbar from "./components/Common/Navbar"
+import NetworkStatusIndicator from "./components/Common/NetworkStatusIndicator"
 import OpenRoute from "./components/core/Auth/OpenRoute"
 import PrivateRoute from "./components/core/Auth/PrivateRoute"
 import AddCourse from "./components/core/Dashboard/AddCourse"
@@ -50,6 +51,7 @@ function App() {
 
   return (
     <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
+      <NetworkStatusIndicator />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
